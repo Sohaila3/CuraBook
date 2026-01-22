@@ -1,0 +1,105 @@
+.contact-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  background: #f9f9f9;
+  padding-bottom: 50px;
+}
+
+/* Main Center Container */
+.contact-page-container {
+  max-width: 1100px;
+  margin: 40px auto;
+}
+
+/* White Card */
+.contact-box {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  border: 1px solid #ddd;
+  flex-wrap: wrap;
+}
+
+/* Left side */
+.contact-left {
+  flex: 1 1 450px;
+}
+
+.contact-title {
+  color: #009688;
+  font-size: 24px;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+/* Input Group */
+.input-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 15px 20px 15px 45px;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 15px;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* Button */
+.send-btn {
+  width: 100%;
+  background: #009688;
+  color: white;
+  padding: 12px;
+  border-radius: 30px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.send-btn:hover {
+  background: #007f73;
+}
+
+/* Right side image */
+.contact-right {
+  flex: 1 1 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-right img {
+  width: 100%;
+  max-width: 350px;
+}
+
+/* Small screen */
+@media (max-width: 768px) {
+  .contact-box {
+    text-align: center;
+  }
+
+  .contact-right img {
+    margin-top: 20px;
+  }
+}

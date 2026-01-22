@@ -1,0 +1,26 @@
+footer {
+  background: #fff;
+  padding: 20px 60px;
+  box-shadow: 0 -2px 4px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.socials i {
+  font-size: 22px;
+  margin-left: 15px;
+  color: #009688;
+  cursor: pointer;
+  
+}
+
+.socials i:hover {
+  color: #333;
+}

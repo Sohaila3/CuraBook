@@ -1,0 +1,214 @@
+/* New Patient Record Page */
+.new-patient-container {
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 50px;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  margin-bottom: 20px;
+}
+
+.record-header .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.record-header .logo-img {
+  width: 36px;
+}
+
+.record-header .logo-text {
+  font-size: 24px;
+  color: #009688;
+  font-weight: 600;
+}
+
+.record-header .page-title {
+  font-size: 28px;
+  color: #333;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.date-info {
+  text-align: right;
+  color: #666;
+  font-size: 13px;
+}
+
+.date-info p {
+  margin: 2px 0;
+}
+
+/* Patient Form */
+.patient-form {
+  padding: 0 40px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.form-section {
+  /* padding: 10px; */
+}
+
+.section-title {
+  font-size: 13px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Note Boxes */
+.note-box {
+  background: #e8f5f3;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  min-height: 80px;
+}
+
+.note-label {
+  display: block;
+  color: #009688;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.note-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-height: 40px;
+}
+
+/* Complaint & History Boxes */
+.complaint-box {
+  background: #e8f5f3;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  min-height: 150px;
+}
+
+.complaint-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-height: 100px;
+}
+
+.history-box {
+  background: #e8f5f3;
+  border-radius: 8px;
+  padding: 15px;
+  min-height: 200px;
+}
+
+.history-textarea {
+  width: 100%;
+  border: none;
+  background: transparent;
+  resize: none;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  min-height: 150px;
+}
+
+/* Demographics Fields */
+.demographics-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.demo-input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid #009688;
+  border-radius: 25px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.demo-input::placeholder {
+  color: #999;
+}
+
+.demo-input:focus {
+  border-color: #009688;
+  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.1);
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.save-btn {
+  background: #009688;
+  color: white;
+  border: none;
+  padding: 15px 60px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.save-btn:hover {
+  background: #00796b;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .record-header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .date-info {
+    text-align: center;
+  }
+  
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .patient-form {
+    padding: 0 20px;
+  }
+}
