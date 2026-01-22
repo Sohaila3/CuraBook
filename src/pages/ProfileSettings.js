@@ -19,6 +19,47 @@ export default function ProfileSettings() {
     confirmPassword: ""
   });
 
+  const [errors, setErrors] = useState({});
+
+  const validators = {
+    fullName: (v) => (!v.trim() ? "Full name is required" : ""),
+    age: (v) => {
+      if (!v) return "Age is required";
+      const n = Number(v);
+      if (Number.isNaN(n) || n < 1 || n > 120) return "Enter a valid age";
+      return "";
+    },
+    phone: (v) => {
+      const clean = (v || "").replace(/\D/g, "");
+      if (!clean) return "Phone number is required";
+      if (!/^\d{8,15}$/.test(clean)) return "Enter a valid phone number";
+      return "";
+    },
+    city: (v) => (!v.trim() ? "City is required" : ""),
+    clinicLocation: (v) => (!v.trim() ? "Clinic location is required" : ""),
+    username: (v) => (!v.trim() ? "Username is required" : ""),
+    email: (v) => {
+      if (!v.trim()) return "Email is required";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) return "Invalid email format";
+      return "";
+    },
+    newPassword: (v) => {
+      if (!v) return ""; // optional
+      const strong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+      if (!strong.test(v)) return "Min 8 chars, uppercase, lowercase, number, symbol";
+      return "";
+    },
+    confirmPassword: (v, form) => {
+      if (!form.newPassword) return "";
+      if (!v) return "Please confirm password";
+      if (v !== form.newPassword) return "Passwords do not match";
+      return "";
+    }
+  };
+
+  // require current password to save changes
+  validators.currentPassword = (v) => (!v ? "Current password is required" : "");
+
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
 
@@ -30,12 +71,35 @@ export default function ProfileSettings() {
       ...prev,
       [name]: value
     }));
+
+    if (validators[name]) {
+      const err = validators[name](value, { ...formData, [name]: value });
+      setErrors((prev) => ({ ...prev, [name]: err }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (validators[name]) {
+      const err = validators[name](value, { ...formData, [name]: value });
+      setErrors((prev) => ({ ...prev, [name]: err }));
+    }
   };
 
   const handleSave = (e) => {
     e.preventDefault();
-    console.log("Profile Settings:", formData);
-    navigate('/doctor-dashboard');
+    let newErrors = {};
+    Object.keys(validators).forEach((f) => {
+      const err = validators[f](formData[f] || "", formData);
+      if (err) newErrors[f] = err;
+    });
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log("Profile Settings:", formData);
+      navigate('/doctor-dashboard');
+    }
   };
 
   const handleCancel = () => {
@@ -74,7 +138,9 @@ export default function ProfileSettings() {
                   placeholder="Full Name"
                   value={formData.fullName}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                  {errors.fullName && <p className="error">{errors.fullName}</p>}
               </div>
 
               <div className="input-group">
@@ -84,7 +150,9 @@ export default function ProfileSettings() {
                   placeholder="Age"
                   value={formData.age}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.age && <p className="error">{errors.age}</p>}
               </div>
 
               <div className="input-group">
@@ -94,7 +162,9 @@ export default function ProfileSettings() {
                   placeholder="Phone"
                   value={formData.phone}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.phone && <p className="error">{errors.phone}</p>}
               </div>
 
               <div className="input-group with-icon">
@@ -104,8 +174,15 @@ export default function ProfileSettings() {
                   placeholder="clinic location"
                   value={formData.clinicLocation}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <span className="input-icon">📍</span>
+                {errors.clinicLocation && <p className="error">{errors.clinicLocation}</p>}
+                <span className="input-icon" aria-hidden>
+                  <svg className="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1 1 18 0z" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                </span>
               </div>
 
               <div className="input-group">
@@ -115,7 +192,9 @@ export default function ProfileSettings() {
                   placeholder="Your City"
                   value={formData.city}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.city && <p className="error">{errors.city}</p>}
               </div>
             </div>
 
@@ -128,8 +207,15 @@ export default function ProfileSettings() {
                   placeholder="User name"
                   value={formData.username}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <span className="input-icon">👤</span>
+                {errors.username && <p className="error">{errors.username}</p>}
+                <span className="input-icon" aria-hidden>
+                  <svg className="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </span>
               </div>
 
               <div className="input-group with-icon">
@@ -139,8 +225,15 @@ export default function ProfileSettings() {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <span className="input-icon">✉️</span>
+                {errors.email && <p className="error">{errors.email}</p>}
+                <span className="input-icon" aria-hidden>
+                  <svg className="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8" />
+                    <rect x="3" y="5" width="18" height="14" rx="2" ry="2" />
+                  </svg>
+                </span>
               </div>
 
               <div className="input-group with-icon">
@@ -150,13 +243,20 @@ export default function ProfileSettings() {
                   placeholder="Current Password"
                   value={formData.currentPassword}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <span 
-                  className="input-icon clickable"
+                {errors.currentPassword && <p className="error">{errors.currentPassword}</p>}
+                <button
+                  type="button"
+                  className="input-icon clickable icon-button"
                   onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  aria-label={showCurrentPassword ? 'Hide current password' : 'Show current password'}
                 >
-                  👁️
-                </span>
+                  <svg className="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
               </div>
 
               <div className="input-group with-icon">
@@ -166,13 +266,20 @@ export default function ProfileSettings() {
                   placeholder="New password"
                   value={formData.newPassword}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
-                <span 
-                  className="input-icon clickable"
+                {errors.newPassword && <p className="error">{errors.newPassword}</p>}
+                <button
+                  type="button"
+                  className="input-icon clickable icon-button"
                   onClick={() => setShowNewPassword(!showNewPassword)}
+                  aria-label={showNewPassword ? 'Hide new password' : 'Show new password'}
                 >
-                  👁️
-                </span>
+                  <svg className="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
               </div>
 
               <div className="input-group">
@@ -182,14 +289,16 @@ export default function ProfileSettings() {
                   placeholder="Confirm password"
                   value={formData.confirmPassword}
                   onChange={handleChange}
+                  onBlur={handleBlur}
                 />
+                {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
               </div>
             </div>
           </div>
 
           {/* Action Buttons */}
           <div className="form-actions">
-            <button type="submit" className="save-btn">
+            <button type="submit" className="save-btn" disabled={!Object.keys(validators).every(f => validators[f](formData[f] || "", formData) === "") }>
               Save Change
             </button>
             <button type="button" className="cancel-btn" onClick={handleCancel}>

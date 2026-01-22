@@ -6,6 +6,7 @@ import "./PatientAppointments.css";
 export default function PatientAppointments() {
   const [activeTab, setActiveTab] = useState("scheduled");
   const [dateFilter, setDateFilter] = useState("");
+  const [query, setQuery] = useState("");
   const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedPatientDetails, setSelectedPatientDetails] = useState(null);
@@ -50,6 +51,12 @@ export default function PatientAppointments() {
   };
 
   const currentAppointments = appointments[activeTab] || [];
+
+  const filteredAppointments = currentAppointments.filter((apt) => {
+    const matchesQuery = !query.trim() || (apt.patientName || "").toLowerCase().includes(query.toLowerCase());
+    const matchesDate = !dateFilter.trim() || (apt.date || "").includes(dateFilter);
+    return matchesQuery && matchesDate;
+  });
 
   const handleShowDetails = (patient) => {
     setSelectedPatientDetails(patient);
@@ -106,7 +113,15 @@ export default function PatientAppointments() {
               onChange={(e) => setDateFilter(e.target.value)}
               className="date-input"
             />
-            <button className="filter-btn">Fillter</button>
+            <button className="filter-btn" onClick={(e) => e.preventDefault()}>Fillter</button>
+            <input
+              type="text"
+              placeholder="Search patient name"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="search-input"
+              style={{ marginLeft: 12 }}
+            />
           </div>
         </div>
 
@@ -126,7 +141,7 @@ export default function PatientAppointments() {
               </tr>
             </thead>
             <tbody>
-              {currentAppointments.map((apt) => (
+              {filteredAppointments.map((apt) => (
                 <tr 
                   key={apt.id}
                   className={selectedAppointment === apt.id ? 'selected' : ''}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import logo from "../assets/logo.png";
 import Navbar from "../components/Navbar";
@@ -7,6 +8,8 @@ import Footer from "../components/Footer";
 export default function Login() {
   const [role, setRole] = useState("patient");
   const [showPass, setShowPass] = useState(false);
+
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({
     loginId: "",
@@ -59,6 +62,20 @@ loginId: (value) => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      // persist role so Navbar can show role-specific links
+      try {
+        localStorage.setItem("role", role);
+      } catch (e) {
+        // ignore storage errors
+      }
+      // notify other components about role change
+      window.dispatchEvent(new Event("roleChanged"));
+
+      if (role === "doctor") {
+        navigate("/doctor-dashboard");
+      } else {
+        navigate("/");
+      }
       alert("Logged in as " + role);
     }
   };
@@ -122,7 +139,7 @@ loginId: (value) => {
 
         <button type="submit" className="login-btn">Login</button>
 
-        <a href="#" className="forgot">Forget Password ?</a>
+        <button type="button" className="forgot" onClick={() => navigate('/forgot-password')}>Forget Password ?</button>
       </form>
 
     </div>

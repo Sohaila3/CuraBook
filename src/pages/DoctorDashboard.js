@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import logo from "../assets/logo.png";
 import doctorsTeam from "../assets/doctors-team.png";
-import stethoscope from "../assets/stethoscope.png";
 import Footer from "../components/Footer";
 import "./DoctorDashboard.css";
 
@@ -85,7 +84,7 @@ export default function DoctorDashboard() {
           </div>
 
           <div className="welcome-section">
-            <h1 className="hello-text">Hello Dr. Mahmoud <span>👋</span></h1>
+            <h1 className="hello-text">Hello Dr. Mahmoud <span>🩺</span></h1>
             <div className="doctor-info">
               <p><strong>Email:</strong> {doctorInfo.email}</p>
               <p><strong>Name:</strong> {doctorInfo.fullName}</p>
@@ -127,7 +126,7 @@ export default function DoctorDashboard() {
             <div className="chart-wrapper">
               <div className="dash-card chart-box">
                 <div className="chart-area">
-                  <ResponsiveContainer width="100%" height="100%">
+                  <ResponsiveContainer width="100%" height={200}>
                     <PieChart>
                       <Pie
                         data={chartData}
