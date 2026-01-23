@@ -42,7 +42,7 @@ export default function Navbar() {
 
       <nav>
         <NavLink to="/" end>Home</NavLink>
-        {role === "doctor" && pathname !== "/" && (
+        {role === "doctor" && pathname !== "/" && pathname !== "/login" && (
           <NavLink to="/doctor-dashboard">Doctor Dashboard</NavLink>
         )}
         <NavLink to="/join">Sign Up</NavLink>
