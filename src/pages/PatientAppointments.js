@@ -13,7 +13,7 @@ export default function PatientAppointments() {
 
   const [appointments] = useState({
     scheduled: [
-      { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 25, gender: "Female" },
+    { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 25, gender: "Female", phone: "123456789", email: "manarahmad@gmail.com" },
       { id: 2, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 30, gender: "Male" },
       { id: 3, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 28, gender: "Female" },
       { id: 4, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 35, gender: "Male" },
@@ -26,15 +26,15 @@ export default function PatientAppointments() {
       { id: 11, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 31, gender: "Female" },
       { id: 12, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Scheduled", age: 26, gender: "Male" },
     ],
-    confirmed: [
-      { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 25, gender: "Female" },
+        confirmed: [
+      { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 25, gender: "Female", phone: "123456789", email: "manarahmad@gmail.com" },
       { id: 2, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 30, gender: "Male" },
       { id: 3, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 28, gender: "Female" },
       { id: 4, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 35, gender: "Male" },
       { id: 5, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Complete", age: 22, gender: "Female" },
     ],
-    cancelled: [
-      { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Cancelled", age: 25, gender: "Female" },
+        cancelled: [
+      { id: 1, patientName: "Asmaa salah", date: "12-12-2025", time: "3:00 PM", status: "Cancelled", age: 25, gender: "Female", phone: "123456789", email: "manarahmad@gmail.com" },
       { id: 2, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Cancelled", age: 30, gender: "Male" },
       { id: 3, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Cancelled", age: 28, gender: "Female" },
       { id: 4, patientName: "Patient Name", date: "12-12-2025", time: "3:00 PM", status: "Cancelled", age: 35, gender: "Male" },
@@ -59,6 +59,8 @@ export default function PatientAppointments() {
   });
 
   const handleShowDetails = (patient) => {
+    // ensure the row is selected and details are shown on first click
+    setSelectedAppointment(patient.id);
     setSelectedPatientDetails(patient);
     setShowDetailsModal(true);
   };
@@ -166,7 +168,8 @@ export default function PatientAppointments() {
                     )}
                   </td>
                   <td>
-                    <button 
+                    <button
+                      type="button"
                       className="details-btn"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -206,6 +209,8 @@ export default function PatientAppointments() {
               <p><strong>Time:</strong> {selectedPatientDetails.time}</p>
               <p><strong>Age:</strong> {selectedPatientDetails.age}</p>
               <p><strong>Contact:</strong> {selectedPatientDetails.gender}</p>
+              <p><strong>Phone Number :</strong> {selectedPatientDetails.phone || ''}</p>
+              <p><strong>Email :</strong> {selectedPatientDetails.email || ''}</p>
             </div>
             <button 
               className="close-modal-btn"

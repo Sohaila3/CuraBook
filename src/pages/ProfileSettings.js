@@ -12,6 +12,7 @@ export default function ProfileSettings() {
     phone: "",
     clinicLocation: "",
     city: "",
+    yearsExperience: "",
     username: "",
     email: "",
     currentPassword: "",
@@ -37,6 +38,12 @@ export default function ProfileSettings() {
     },
     city: (v) => (!v.trim() ? "City is required" : ""),
     clinicLocation: (v) => (!v.trim() ? "Clinic location is required" : ""),
+    yearsExperience: (v) => {
+      if (!v) return ""; // optional
+      const n = Number(v);
+      if (Number.isNaN(n) || n < 0 || n > 100) return "Enter a valid number";
+      return "";
+    },
     username: (v) => (!v.trim() ? "Username is required" : ""),
     email: (v) => {
       if (!v.trim()) return "Email is required";
@@ -196,6 +203,18 @@ export default function ProfileSettings() {
                 />
                 {errors.city && <p className="error">{errors.city}</p>}
               </div>
+
+              <div className="input-group">
+                <input
+                  type="text"
+                  name="yearsExperience"
+                  placeholder="Years of Experience"
+                  value={formData.yearsExperience}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.yearsExperience && <p className="error">{errors.yearsExperience}</p>}
+              </div>
             </div>
 
             {/* Right Column */}
@@ -292,6 +311,17 @@ export default function ProfileSettings() {
                   onBlur={handleBlur}
                 />
                 {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
+              </div>
+
+              <div className="input-group">
+                <textarea
+                  name="caption"
+                  placeholder="Caption ( appears on the card )"
+                  value={formData.caption || ""}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  rows={4}
+                />
               </div>
             </div>
           </div>
