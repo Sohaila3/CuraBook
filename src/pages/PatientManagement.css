@@ -1,0 +1,222 @@
+/* Patient Management Page */
+.patient-management-container {
+  padding: 30px 60px;
+  min-height: calc(100vh - 200px);
+  background: #fff;
+  position: relative;
+}
+
+.page-title {
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.search-box {
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 15px 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 25px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+  border-color: #009688;
+}
+
+.search-box input::placeholder {
+  color: #999;
+}
+
+.add-patient-btn {
+  background: #009688;
+  color: white;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-patient-btn:hover {
+  background: #00796b;
+}
+
+/* Patients Table */
+.patients-table-container {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.patients-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.patients-table thead {
+  background: #f5f5f5;
+}
+
+.patients-table th {
+  padding: 18px 20px;
+  text-align: left;
+  color: #666;
+  font-weight: 500;
+  font-size: 14px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.patients-table td {
+  padding: 18px 20px;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.patients-table tbody tr {
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.patients-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.patients-table tbody tr.selected {
+  background: #e0f7f5;
+}
+
+.patient-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patient-avatar {
+  width: 35px;
+  height: 35px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.patient-name {
+  color: #333;
+  font-weight: 500;
+}
+
+.edit-btn {
+  background: #009688;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.edit-btn:hover {
+  background: #00796b;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #fff;
+  border-top: 1px solid #f0f0f0;
+}
+
+.pagination {
+  color: #999;
+  font-size: 14px;
+}
+
+.delete-btn {
+  background: transparent;
+  color: #e57373;
+  border: 2px solid #e57373;
+  padding: 10px 30px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.delete-btn:hover:not(:disabled) {
+  background: #e57373;
+  color: white;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Side Navigation Arrow */
+.side-nav-arrow {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #009688;
+  color: white;
+  width: 20px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+}
+
+.side-nav-arrow:hover {
+  background: #00796b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .patient-management-container {
+    padding: 20px;
+  }
+  
+  .controls-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .patients-table th,
+  .patients-table td {
+    padding: 12px;
+    font-size: 13px;
+  }
+}

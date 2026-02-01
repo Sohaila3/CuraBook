@@ -1,0 +1,165 @@
+/* MAIN CONTAINER */
+.home-container {
+  width: 100%;
+  padding-top: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+/* ========================= HERO SECTION ========================= */
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40px 80px;
+  background-color: #fff;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 40px;
+  line-height: 1.3;
+  color: #1f1f1f;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.hero-text .icon {
+  font-size: 35px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.btn-primary {
+  background-color: #0cb29d;
+  border: none;
+  padding: 14px 25px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #b2dfdb;
+      color: #004d40;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #0cb29d;
+  padding: 12px 22px;
+  font-size: 16px;
+  color: #0cb29d;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-outline:hover {
+  background: #b2dfdb;
+      color: #004d40;
+}
+
+.hero-img img {
+  width: 420px;
+  height: auto;
+}
+
+
+
+/* ========================= SPECIALTIES SECTION ========================= */
+
+.specialties {
+  background-color: #f8f9fb;
+  padding: 50px 80px;
+  margin-top: 40px;
+}
+
+.specialties h2 {
+  /* text-align: center; */
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f1f1f;
+  margin-bottom: 50px;
+}
+
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.specialty-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.specialty-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+.spec-icon {
+  width: 55px;
+  margin-bottom: 15px;
+}
+
+.specialty-card h3 {
+  font-size: 18px;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.specialty-card p {
+  font-size: 14px;
+  color: #666;
+}
+
+
+
+/* ========================= RESPONSIVE ========================= */
+
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-img img {
+    width: 320px;
+    margin-top: 25px;
+  }
+
+  .specialties-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .specialties-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 30px 20px;
+  }
+}

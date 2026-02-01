@@ -1,0 +1,88 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+.noti-wrapper {
+  padding: 40px 60px;
+  background: #f7f7f7;
+  min-height: 100vh;
+}
+
+.noti-title {
+  font-size: 32px;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.noti-sub {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 35px;
+}
+
+/* ===== GRID LAYOUT ===== */
+.noti-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* ===== CARD ===== */
+.noti-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  transition: 0.2s ease-in-out;
+}
+
+.noti-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+}
+
+/* ===== ICON ===== */
+.noti-icon {
+  width: 50px;
+  height: 30px;
+  border-radius: 50%;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== TEXT ===== */
+.noti-text h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.noti-text p {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1100px) {
+  .noti-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .noti-grid {
+    grid-template-columns: 1fr;
+  }
+}
